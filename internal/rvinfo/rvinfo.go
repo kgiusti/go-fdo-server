@@ -124,11 +124,10 @@ func UpdateRvInfo(rvInfo *[][]protocol.RvInstruction, index int, rvMap map[proto
 			return fmt.Errorf("error parsing rvData: Invalid RVIPAddress")
 		}
 		hostIP := net.ParseIP(host)
-		if hostIP != nil && (hostIP.To4() != nil || hostIP.To16() != nil) {
-			newRvInfo[index] = append(newRvInfo[index], protocol.RvInstruction{Variable: protocol.RVIPAddress, Value: utils.MustMarshal(hostIP)})
-		} else {
+		if hostIP == nil {
 			return fmt.Errorf("error parsing rvData: Invalid RVIPAddress: '%s'", host)
 		}
+		newRvInfo[index] = append(newRvInfo[index], protocol.RvInstruction{Variable: protocol.RVIPAddress, Value: utils.MustMarshal(hostIP)})
 	}
 
 	if rvMap[protocol.RVDevPort] != nil {
