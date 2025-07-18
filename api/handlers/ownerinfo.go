@@ -11,7 +11,7 @@ import (
 
 	"log/slog"
 
-	"github.com/fido-device-onboard/go-fdo-server/internal/db"
+	"github.com/kgiusti/go-fdo-server/internal/db"
 )
 
 func OwnerInfoHandler(w http.ResponseWriter, r *http.Request) {

@@ -11,11 +11,11 @@ import (
 	"time"
 
 	"github.com/fido-device-onboard/go-fdo"
-	"github.com/fido-device-onboard/go-fdo-server/internal/ownerinfo"
-	"github.com/fido-device-onboard/go-fdo-server/internal/rvinfo"
-	"github.com/fido-device-onboard/go-fdo-server/internal/tls"
 	"github.com/fido-device-onboard/go-fdo/protocol"
 	"github.com/fido-device-onboard/go-fdo/sqlite"
+	"github.com/kgiusti/go-fdo-server/internal/ownerinfo"
+	"github.com/kgiusti/go-fdo-server/internal/rvinfo"
+	"github.com/kgiusti/go-fdo-server/internal/tls"
 )
 
 var useTLS bool

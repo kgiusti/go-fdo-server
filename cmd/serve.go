@@ -33,17 +33,17 @@ import (
 	"time"
 
 	"github.com/fido-device-onboard/go-fdo"
-	"github.com/fido-device-onboard/go-fdo-server/api"
-	"github.com/fido-device-onboard/go-fdo-server/internal/db"
-	"github.com/fido-device-onboard/go-fdo-server/internal/ownerinfo"
-	"github.com/fido-device-onboard/go-fdo-server/internal/rvinfo"
-	"github.com/fido-device-onboard/go-fdo-server/internal/to0"
 	"github.com/fido-device-onboard/go-fdo/custom"
-	transport "github.com/fido-device-onboard/go-fdo/http"
 	"github.com/fido-device-onboard/go-fdo/fsim"
+	transport "github.com/fido-device-onboard/go-fdo/http"
 	"github.com/fido-device-onboard/go-fdo/protocol"
 	"github.com/fido-device-onboard/go-fdo/serviceinfo"
 	"github.com/fido-device-onboard/go-fdo/sqlite"
+	"github.com/kgiusti/go-fdo-server/api"
+	"github.com/kgiusti/go-fdo-server/internal/db"
+	"github.com/kgiusti/go-fdo-server/internal/ownerinfo"
+	"github.com/kgiusti/go-fdo-server/internal/rvinfo"
+	"github.com/kgiusti/go-fdo-server/internal/to0"
 	"github.com/spf13/cobra"
 )
 

@@ -10,13 +10,13 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/fido-device-onboard/go-fdo-server/internal/utils"
+	"github.com/kgiusti/go-fdo-server/internal/utils"
 
 	"log/slog"
 
-	"github.com/fido-device-onboard/go-fdo-server/internal/db"
-	"github.com/fido-device-onboard/go-fdo-server/internal/rvinfo"
 	"github.com/fido-device-onboard/go-fdo/protocol"
+	"github.com/kgiusti/go-fdo-server/internal/db"
+	"github.com/kgiusti/go-fdo-server/internal/rvinfo"
 )
 
 func GetVoucherHandler(w http.ResponseWriter, r *http.Request) {

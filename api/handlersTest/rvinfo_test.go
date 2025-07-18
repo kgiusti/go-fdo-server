@@ -8,10 +8,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/fido-device-onboard/go-fdo-server/api/handlers"
-	"github.com/fido-device-onboard/go-fdo-server/internal/db"
-	"github.com/fido-device-onboard/go-fdo-server/internal/rvinfo"
 	"github.com/fido-device-onboard/go-fdo/sqlite"
+	"github.com/kgiusti/go-fdo-server/api/handlers"
+	"github.com/kgiusti/go-fdo-server/internal/db"
+	"github.com/kgiusti/go-fdo-server/internal/rvinfo"
 )
 
 func setupTestRvServer(t *testing.T) (*httptest.Server, *sqlite.DB) {

@@ -2,10 +2,11 @@ package handlersTest
 
 import (
 	"encoding/json"
-	"github.com/fido-device-onboard/go-fdo-server/api/handlers"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/kgiusti/go-fdo-server/api/handlers"
 )
 
 func TestHealthHandler(t *testing.T) {

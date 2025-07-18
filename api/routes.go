@@ -4,13 +4,14 @@
 package api
 
 import (
-	"golang.org/x/time/rate"
 	"net/http"
 
-	"github.com/fido-device-onboard/go-fdo-server/api/handlers"
+	"golang.org/x/time/rate"
+
 	transport "github.com/fido-device-onboard/go-fdo/http"
 	"github.com/fido-device-onboard/go-fdo/protocol"
 	"github.com/fido-device-onboard/go-fdo/sqlite"
+	"github.com/kgiusti/go-fdo-server/api/handlers"
 )
 
 // HTTPHandler handles HTTP requests

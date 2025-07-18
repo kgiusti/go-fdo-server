@@ -5,8 +5,8 @@ import (
 	"log/slog"
 	"net"
 
-	"github.com/fido-device-onboard/go-fdo-server/internal/db"
 	"github.com/fido-device-onboard/go-fdo/protocol"
+	"github.com/kgiusti/go-fdo-server/internal/db"
 )
 
 func RetrieveOwnerInfo() ([]protocol.RvTO2Addr, error) {

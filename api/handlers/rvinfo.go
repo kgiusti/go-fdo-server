@@ -14,9 +14,9 @@ import (
 
 	"log/slog"
 
-	"github.com/fido-device-onboard/go-fdo-server/internal/db"
-	"github.com/fido-device-onboard/go-fdo-server/internal/rvinfo"
 	"github.com/fido-device-onboard/go-fdo/protocol"
+	"github.com/kgiusti/go-fdo-server/internal/db"
+	"github.com/kgiusti/go-fdo-server/internal/rvinfo"
 )
 
 func RvInfoHandler(rvInfo *[][]protocol.RvInstruction) http.HandlerFunc {

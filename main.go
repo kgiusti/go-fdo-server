@@ -3,7 +3,7 @@
 
 package main
 
-import "github.com/fido-device-onboard/go-fdo-server/cmd"
+import "github.com/kgiusti/go-fdo-server/cmd"
 
 func main() {
 	cmd.Execute()

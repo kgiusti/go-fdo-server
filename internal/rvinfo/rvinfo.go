@@ -11,10 +11,10 @@ import (
 	"strconv"
 
 	"github.com/fido-device-onboard/go-fdo"
-	"github.com/fido-device-onboard/go-fdo-server/internal/db"
-	"github.com/fido-device-onboard/go-fdo-server/internal/utils"
 	"github.com/fido-device-onboard/go-fdo/cbor"
 	"github.com/fido-device-onboard/go-fdo/protocol"
+	"github.com/kgiusti/go-fdo-server/internal/db"
+	"github.com/kgiusti/go-fdo-server/internal/utils"
 )
 
 func CreateRvInfo(useTLS bool, host string, port uint16) ([][]protocol.RvInstruction, error) {
