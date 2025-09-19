@@ -178,6 +178,14 @@ stop_services () {
   killall -q go-fdo-server || :
 }
 
+# delete all server-related files. This allows the server to be
+# restarted in a pristine state
+cleanup_service() {
+  local server=$1
+  rm -f "${base_dir}/${server}.sqlite"
+  rm -f "${base_dir}/${server}.log"
+}
+
 install_client() {
   go install github.com/fido-device-onboard/go-fdo-client@latest
 }

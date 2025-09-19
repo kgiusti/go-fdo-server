@@ -165,10 +165,10 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      - name: Run the wget FSIM
+      - name: Run the wget FSIM test suite
         run: |
           source test/test-wget-fsim.sh
-          test_wget_fsim
+          run_wget_fsim_tests
 
       - name: Get Manufacturer, Rendezvous and Owner server logs after a failed onboarding
         if: failure() && steps.setup_env.outcome == 'success'
@@ -180,4 +180,4 @@ jobs:
         if: always()
         run: |
           source test/test-wget-fsim.sh
-          cleanup_wget
+          wget_cleanup
