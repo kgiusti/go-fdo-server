@@ -43,7 +43,7 @@ manufacturer_url="http://${manufacturer_service}"
 # needed for 'wait_for_services_ready' do not remove
 manufacturer_health_url="${manufacturer_url}/health"
 manufacturer_config_file="${configs_dir}/manufacturing.yaml"
-declare -a manufacturer_cmdline=("--debug" "--config=${manufacturer_config_file}")
+declare -a manufacturer_cmdline=("--log-level=debug" "--config=${manufacturer_config_file}")
 
 rendezvous_service_name="rendezvous"
 rendezvous_dns=rendezvous
@@ -59,7 +59,7 @@ rendezvous_url="http://${rendezvous_service}"
 # needed for 'wait_for_services_ready' do not remove
 rendezvous_health_url="${rendezvous_url}/health"
 rendezvous_config_file="${configs_dir}/rendezvous.yaml"
-declare -a rendezvous_cmdline=("--debug" "--config=${rendezvous_config_file}")
+declare -a rendezvous_cmdline=("--log-level=debug" "--config=${rendezvous_config_file}")
 
 owner_service_name="owner"
 owner_dns=owner
@@ -84,7 +84,7 @@ owner_health_url="${owner_url}/health"
 #shellcheck disable=SC2034
 owner_ov="${base_dir}/owner.ov"
 owner_config_file="${configs_dir}/owner.yaml"
-declare -a owner_cmdline=("--debug" "--config=${owner_config_file}")
+declare -a owner_cmdline=("--log-level=debug" "--config=${owner_config_file}")
 
 declare -a services=("${manufacturer_service_name}" "${rendezvous_service_name}" "${owner_service_name}")
 declare -a directories=("${base_dir}" "${certs_dir}" "${credentials_dir}" "${logs_dir}" "${configs_dir}")
