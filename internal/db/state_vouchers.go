@@ -128,11 +128,25 @@ func (s *State) ReplaceVoucher(ctx context.Context, guid protocol.GUID, ov *fdo.
 		UpdatedAt:  now,
 	}
 
-	// Replace the old voucher
-	return s.DB.Where("guid = ?", guid[:]).Assign(voucher).FirstOrCreate(&voucher).Error
+	// Mark TO2 completion for this GUID and record new GUID that changed
+	completedAt := time.Now()
+	replacement := DeviceOnboarding{GUID: guid[:], NewGUID: ov.Header.Val.GUID[:], TO2Completed: true, TO2CompletedAt: &completedAt}
+
+	// Perform both operations atomically
+	return s.DB.Transaction(func(tx *gorm.DB) error {
+		// Replace the old voucher
+		if err := tx.Where("guid = ?", guid[:]).Assign(voucher).FirstOrCreate(&voucher).Error; err != nil {
+			return err
+		}
+		// Update onboarding completion and new GUID
+		return tx.Where("guid = ?", guid[:]).
+			Assign(replacement).
+			FirstOrCreate(&DeviceOnboarding{}).Error
+	})
 }
 
 // RemoveVoucher untracks a voucher, possibly by deleting it or marking it as removed
+// TODO: we should mark the voucher as removed instead of deleting it
 func (s *State) RemoveVoucher(ctx context.Context, guid protocol.GUID) (*fdo.Voucher, error) {
 	var voucher Voucher
 	if err := s.DB.Where("guid = ?", guid[:]).First(&voucher).Error; err != nil {

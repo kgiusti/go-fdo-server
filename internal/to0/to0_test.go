@@ -65,9 +65,12 @@ func TestRegisterRvBlob_BreaksAfterFirstSuccess(t *testing.T) {
 	defer func() { newTO0Client = oldNew }()
 
 	// Act
-	err := RegisterRvBlob(rvInfo, "00112233445566778899aabbccddeeff", nil, nil, false)
+	refresh, err := RegisterRvBlob(rvInfo, "00112233445566778899aabbccddeeff", nil, nil, false)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
+	}
+	if refresh == 0 {
+		t.Fatalf("expected non-zero refresh on success")
 	}
 
 	// Assert: calls should be exactly 2 (stop after first success despite 3 potential)
