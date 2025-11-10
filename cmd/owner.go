@@ -240,6 +240,8 @@ func serveOwner(config *OwnerServerConfig) error {
 
 	// Handle messages
 	apiRouter := http.NewServeMux()
+	apiRouter.HandleFunc("GET /vouchers", handlers.GetVoucherHandler)
+	apiRouter.HandleFunc("GET /vouchers/{guid}", handlers.GetVoucherByGUIDHandler)
 	apiRouter.Handle("POST /owner/vouchers", handlers.InsertVoucherHandler([]crypto.PublicKey{state.ownerKey.Public()}))
 	apiRouter.HandleFunc("/owner/redirect", handlers.OwnerInfoHandler)
 	apiRouter.Handle("POST /owner/resell/{guid}", handlers.ResellHandler(to2Server))

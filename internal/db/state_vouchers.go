@@ -8,6 +8,7 @@ import (
 	"crypto"
 	"crypto/rsa"
 	"crypto/x509"
+	"encoding/hex"
 	"fmt"
 	"time"
 
@@ -128,6 +129,7 @@ func (s *State) ReplaceVoucher(ctx context.Context, guid protocol.GUID, ov *fdo.
 		UpdatedAt:  now,
 	}
 
+	fmt.Printf("\nKAG %s\n", hex.EncodeToString(voucher.GUID))
 	// Mark TO2 completion for this GUID and record new GUID that changed
 	completedAt := time.Now()
 	replacement := DeviceOnboarding{GUID: guid[:], NewGUID: ov.Header.Val.GUID[:], TO2Completed: true, TO2CompletedAt: &completedAt}

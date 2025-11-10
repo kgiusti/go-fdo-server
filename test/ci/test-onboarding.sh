@@ -45,6 +45,11 @@ run_test() {
   echo "⭐ Running FIDO Device Onboard"
   run_fido_device_onboard --debug
 
+  NEW_GUID=`grep "KAG" "${owner_log}" | awk '{print $2}'`
+  echo "New guid: $NEW_GUID"
+  curl --fail --verbose --silent --insecure "${owner_url}/api/v1/vouchers"
+  curl --fail --verbose --silent --insecure "${owner_url}/api/v1/vouchers/${guid}"
+  curl --fail --verbose --silent --insecure "${owner_url}/api/v1/vouchers/${NEW_GUID}"
   echo "⭐ Success! ✅"
   trap cleanup EXIT
 }
