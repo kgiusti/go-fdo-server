@@ -52,8 +52,11 @@ export LDFLAGS="-X %{goipath}/internal/version.VERSION=%{version}"
 %install
 install -m 0755 -vd %{buildroot}%{_bindir}
 install -m 0755 -vp -s %{gobuilddir}/bin/* %{buildroot}%{_bindir}
-# Configuration dir
-install -m 0755 -vd %{buildroot}%{_sysconfdir}/%{name}
+# Configuration
+install -m 0775 -vd %{buildroot}%{_sysconfdir}/%{name}
+install -m 0644 -vp -D configs/manufacturing-server.yml %{buildroot}%{_sysconfdir}/%{name}
+install -m 0644 -vp -D configs/owner-server.yml %{buildroot}%{_sysconfdir}/%{name}
+install -m 0644 -vp -D configs/rendezvous-server.yml %{buildroot}%{_sysconfdir}/%{name}
 # Sysusers
 install -m 0644 -vp -D %{SOURCE2} %{buildroot}/%{_sysusersdir}/go-fdo-server.conf
 install -m 0644 -vp -D %{SOURCE3} %{buildroot}/%{_sysusersdir}/go-fdo-server-manufacturer.conf
@@ -78,7 +81,7 @@ install -m 0755 -vp -D scripts/* %{buildroot}%{_datadir}/%{name}
 %license LICENSE vendor/modules.txt
 %doc DOCKERFILE_USAGE.md FSIM_USAGE.md README.md SECURITY.md
 %{_bindir}/go-fdo-server
-%config(noreplace) %attr(770, root, go-fdo-server) %{_sysconfdir}/%{name}
+%dir %attr(775, root, go-fdo-server) %{_sysconfdir}/%{name}
 %{_sysusersdir}/%{name}.conf
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/fdo-utils.sh
@@ -107,6 +110,9 @@ preparing devices for the on-boarding process during the manufacturing phase.
 %config(noreplace) %{_sysconfdir}/sysconfig/go-fdo-server-manufacturer
 # Sysuser
 %{_sysusersdir}/go-fdo-server-manufacturer.conf
+# Default config
+%config(noreplace) %attr(644, root, go-fdo-server) %{_sysconfdir}/%{name}/manufacturing-server.yml
+
 %pre manufacturer
 %sysusers_create_compat %{SOURCE3}
 
@@ -136,6 +142,9 @@ voucher.
 %config(noreplace) %{_sysconfdir}/sysconfig/go-fdo-server-rendezvous
 # Sysuser
 %{_sysusersdir}/go-fdo-server-rendezvous.conf
+# Default config
+%config(noreplace) %attr(644, root, go-fdo-server) %{_sysconfdir}/%{name}/rendezvous-server.yml
+
 %pre rendezvous
 %sysusers_create_compat %{SOURCE4}
 
@@ -165,6 +174,9 @@ necessary credentials and configuration for operation.
 %config(noreplace) %{_sysconfdir}/sysconfig/go-fdo-server-owner
 # Sysuser
 %{_sysusersdir}/go-fdo-server-owner.conf
+# Default config
+%config(noreplace) %attr(644, root, go-fdo-server) %{_sysconfdir}/%{name}/owner-server.yml
+
 %pre owner
 %sysusers_create_compat %{SOURCE5}
 
