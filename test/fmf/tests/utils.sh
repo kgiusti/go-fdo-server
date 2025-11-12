@@ -86,14 +86,14 @@ configure_services() {
       local group="go-fdo-server"
       sudo chown "${user}:${group}" "${dest_key_path}" "${dest_crt_path}" || true
 
-      # Create or update sysconfig with ADDITIONAL_OPTS pointing to /etc/go-fdo-server paths
+      # Create or update sysconfig with CMDLINE_OPTS pointing to /etc/go-fdo-server paths
       local add_opts="--http-cert=${dest_crt_path} --http-key=${dest_key_path}"
       local sysconfig_file="/etc/sysconfig/go-fdo-server-${service}"
       [[ "${service}" =~ "owner" ]] && add_opts+=" --to0-insecure-tls"
       if [[ -f "${sysconfig_file}" ]]; then
-        sudo sed -i "s|^ADDITIONAL_OPTS=\".*\"|ADDITIONAL_OPTS=\"${add_opts}\"|" "${sysconfig_file}" || true
+        sudo sed -i "s|^CMDLINE_OPTS=\".*\"|CMDLINE_OPTS=\"${add_opts}\"|" "${sysconfig_file}" || true
       else
-        echo "ADDITIONAL_OPTS=\"${add_opts}\"" | sudo tee "${sysconfig_file}" >/dev/null
+        echo "CMDLINE_OPTS=\"${add_opts}\"" | sudo tee "${sysconfig_file}" >/dev/null
       fi
     fi
   done
