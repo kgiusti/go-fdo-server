@@ -103,9 +103,9 @@ cleanup_services_configuration() {
   for service in "${services[@]}"; do
     local sysconfig_file="/etc/sysconfig/go-fdo-server-${service}"
     if [[ -f "${sysconfig_file}" ]]; then
-      # Reset ADDITIONAL_OPTS back to empty instead of deleting the file
-      if grep -q '^ADDITIONAL_OPTS=' "${sysconfig_file}"; then
-        sudo sed -i 's|^ADDITIONAL_OPTS=".*"|ADDITIONAL_OPTS=""|' "${sysconfig_file}" || true
+      # Reset CMDLINE_OPTS back to empty instead of deleting the file
+      if grep -q '^CMDLINE_OPTS=' "${sysconfig_file}"; then
+        sudo sed -i 's|^CMDLINE_OPTS=".*"|CMDLINE_OPTS=""|' "${sysconfig_file}" || true
       fi
     fi
   done
