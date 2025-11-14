@@ -60,5 +60,3 @@ func TestUpdateRvInfo_Invalid_ReturnsErrInvalidRvInfo(t *testing.T) {
 		t.Fatalf("expected ErrInvalidRvInfo, got %v", err)
 	}
 }
-
-
