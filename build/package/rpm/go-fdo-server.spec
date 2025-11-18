@@ -54,9 +54,9 @@ install -m 0755 -vd %{buildroot}%{_bindir}
 install -m 0755 -vp -s %{gobuilddir}/bin/* %{buildroot}%{_bindir}
 # Configuration
 install -m 0755 -vd %{buildroot}%{_sysconfdir}/%{name}
-install -m 0644 -vp -D configs/manufacturing.yaml %{buildroot}%{_sysconfdir}/%{name}
-install -m 0644 -vp -D configs/owner.yaml %{buildroot}%{_sysconfdir}/%{name}
-install -m 0644 -vp -D configs/rendezvous.yaml %{buildroot}%{_sysconfdir}/%{name}
+install -m 0644 -vp configs/manufacturing.yaml %{buildroot}%{_sysconfdir}/%{name}
+install -m 0644 -vp configs/owner.yaml %{buildroot}%{_sysconfdir}/%{name}
+install -m 0644 -vp configs/rendezvous.yaml %{buildroot}%{_sysconfdir}/%{name}
 # Certificates
 install -m 0755 -vd %{buildroot}%{_sysconfdir}/pki/%{name}
 # Sysusers
@@ -69,10 +69,10 @@ install -m 0755 -vd %{buildroot}%{_unitdir}
 install -m 0644 -vp -D init/systemd/* %{buildroot}%{_unitdir}
 # Helpers
 install -m 0755 -vd %{buildroot}%{_libexecdir}/%{name}
-install -m 0755 -vp -D scripts/cert-utils.sh %{buildroot}%{_libexecdir}/%{name}
-install -m 0755 -vp -D scripts/generate-device-ca-certs.sh %{buildroot}%{_libexecdir}/%{name}
-install -m 0755 -vp -D scripts/generate-manufacturer-certs.sh %{buildroot}%{_libexecdir}/%{name}
-install -m 0755 -vp -D scripts/generate-owner-certs.sh %{buildroot}%{_libexecdir}/%{name}
+install -m 0755 -vp scripts/cert-utils.sh %{buildroot}%{_libexecdir}/%{name}
+install -m 0755 -vp scripts/generate-device-ca-certs.sh %{buildroot}%{_libexecdir}/%{name}
+install -m 0755 -vp scripts/generate-manufacturer-certs.sh %{buildroot}%{_libexecdir}/%{name}
+install -m 0755 -vp scripts/generate-owner-certs.sh %{buildroot}%{_libexecdir}/%{name}
 
 %check
 %if %{with check}
