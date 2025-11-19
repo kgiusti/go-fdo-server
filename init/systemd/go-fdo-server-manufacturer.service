@@ -8,7 +8,7 @@
 #
 #	[Service]
 #       ExecStart=
-#       ExecStart=/bin/sh -c 'exec /usr/bin/go-fdo-server manufacturing --log-level debug'
+#       ExecStart=/usr/bin/go-fdo-server manufacturing --log-level debug
 
 [Unit]
 Description=Go FDO manufacturer server
@@ -21,7 +21,7 @@ Type=simple
 PrivateDevices=yes
 CacheDirectory=go-fdo-server-manufacturer
 StateDirectory=go-fdo-server-manufacturer
-ExecStart=/bin/sh -c 'exec /usr/bin/go-fdo-server manufacturing'
+ExecStart=/usr/bin/go-fdo-server manufacturing
 User=go-fdo-server-manufacturer
 
 [Install]
