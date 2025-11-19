@@ -8,7 +8,7 @@
 #
 #	[Service]
 #       ExecStart=
-#       ExecStart=/bin/sh -c 'exec /usr/bin/go-fdo-server owner --log-level debug'
+#       ExecStart=/usr/bin/go-fdo-server owner --log-level debug
 
 [Unit]
 Description=Go FDO owner server
@@ -21,7 +21,7 @@ Type=simple
 PrivateDevices=yes
 CacheDirectory=go-fdo-server-owner
 StateDirectory=go-fdo-server-owner
-ExecStart=/bin/sh -c 'exec /usr/bin/go-fdo-server owner'
+ExecStart=/usr/bin/go-fdo-server owner
 User=go-fdo-server-owner
 
 [Install]
