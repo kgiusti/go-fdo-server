@@ -7,5 +7,10 @@ subj="/C=US/O=FDO/CN=Device CA"
 key="${cert_dir}/device-ca-example.key"
 crt="${cert_dir}/device-ca-example.crt"
 
+# Do not overwrite existing cert/key files unless one of the pair is
+# missing
+if [[ ! -f "${key}" || ! -f "${crt}" ]]; then
+  rm -f "${key}" "${crt}"
+fi
 generate_cert "${key}" "${crt}" "${subj}"
 chmod g+r "${key}"
