@@ -16,5 +16,6 @@ http:
 device_ca:
   cert: "/etc/pki/go-fdo-server/device-ca-example.crt"
 owner:
+  cert: "/etc/pki/go-fdo-server/owner-example.crt"
   key: "/etc/pki/go-fdo-server/owner-example.key"
 
