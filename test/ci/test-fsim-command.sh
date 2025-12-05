@@ -1,19 +1,16 @@
 #! /usr/bin/env bash
+#
+# This test verifies the fdo.command FSIM
+#
+# Step 1: run "touch" on the device to create an empty test file
+# Step 2: run a command that renames the test file
+#
+# Verify that the file exists in the working directory of the
+# go-fdo-client and has the expected name.
 
 set -euo pipefail
 
 source "$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)/test-fsim-config.sh"
-
-# FSIM fdo.download specific configuration
-fsim_download_dir="${base_dir}/fsim/download"
-owner_download_dir="${fsim_download_dir}/owner"
-owner_download_subdir="${owner_download_dir}/subdir"
-device_download_dir="${fsim_download_dir}/device"
-
-# Owner files are all relative to the $owner_download_dir. These are the source files:
-owner_files=("owner-file1" "owner-file2" "subdir/owner-file3")
-# Destination files on the device. Either absolute, or relative to client working dir:
-device_files=("${device_download_dir}/device-file1" "device-file2" "device-file3")
 
 configure_service_owner() {
   cat > "${owner_config_file}" <<EOF
@@ -31,37 +28,25 @@ owner:
   key: "${owner_key}"
   to0_insecure_tls: true
   service_info:
-    - fsim: "fdo.download"
+    - fsim: "fdo.command"
       params:
-        dir: "${owner_download_dir}"
-        files:
-          - src: "${owner_files[0]}"
-            dst: "${device_files[0]}"
-          - src: "${owner_files[1]}"
-            dst: "${device_files[1]}"
-          - src: "${owner_files[2]}"
-            dst: "${device_files[2]}"
+        may_fail: false
+        return_stdout: true
+        cmd: "touch"
+        args: ["firstCommand.txt"]
+    - fsim: "fdo.command"
+      params:
+        may_fail: false
+        return_stdout: false
+        cmd: "bash"
+        args:
+          - "-c"
+          - |
+            set -xeuo pipefail
+            if [ -a firstCommand.txt ]; then
+                mv firstCommand.txt commandSuccess.txt
+            fi
 EOF
-}
-
-generate_download_files() {
-  cd "${owner_download_dir}"
-  for owner_file in "${owner_files[@]}"; do
-    prepare_payload "${owner_file}"
-  done
-  cd - >/dev/null
-}
-
-verify_downloads() {
-  for (( i=0; i<${#owner_files[@]}; i+=1 )); do
-    src="${owner_download_dir}/${owner_files[$i]}"
-    dst="${device_files[$i]}"
-    if [ "${dst:0:1}" != "/" ]; then
-      # destination is relative and was written to the go-fdo-client working dir
-      dst="${credentials_dir:?}/${dst}"
-    fi
-    verify_equal_files "${src}" "${dst}"
-  done
 }
 
 # Public entrypoint used by CI
@@ -74,7 +59,6 @@ run_test() {
   show_env
 
   log_info "Creating directories"
-  directories+=("$owner_download_subdir" "$device_download_dir")
   create_directories
 
   log_info "Generating service certificates"
@@ -88,9 +72,6 @@ run_test() {
 
   log_info "Configuring services"
   configure_services
-
-  log_info "Generate the download payloads on owner side: ${owner_files[*]}"
-  generate_download_files
 
   log_info "Configure DNS and start services"
   start_services
@@ -111,11 +92,12 @@ run_test() {
   log_info "Sending Ownership Voucher to the Owner"
   send_manufacturer_ov_to_owner "${manufacturer_url}" "${guid}" "${owner_url}"
 
-  log_info "Running FIDO Device Onboard with FSIM fdo.download"
-  run_fido_device_onboard "${guid}"
+  log_info "Running FIDO Device Onboard with FSIM fdo.command"
+  run_fido_device_onboard "${guid}" --debug
 
-  log_info "Verify downloaded files"
-  verify_downloads
+  log_info "Verifying the results of the fdo.command operation"
+  [ -a "${credentials_dir}/commandSuccess.txt" ] ||
+    log_error "Expected file ${credentials_dir}/commandSuccess.txt not present"
 
   log_info "Unsetting the error trap handler"
   trap - ERR
@@ -123,7 +105,4 @@ run_test() {
 }
 
 # Allow running directly
-[[ "${BASH_SOURCE[0]}" != "$0" ]] || {
-  run_test
-  cleanup
-}
+[[ "${BASH_SOURCE[0]}" != "$0" ]] || { run_test; cleanup; }
