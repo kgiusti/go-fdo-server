@@ -233,6 +233,7 @@ install_server() {
   if [ ! -v "PACKIT_COPR_RPMS" ]; then
     commit="$(git rev-parse --short HEAD)"
     rpm -q go-fdo-server | grep -q "go-fdo-server.*git${commit}.*" || { \
+      pwd; ls -l;
       make rpm;
       sudo dnf install -y rpmbuild/rpms/{noarch,"$(uname -m)"}/*git"${commit}"*.rpm;
     }
