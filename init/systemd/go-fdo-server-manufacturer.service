@@ -21,7 +21,7 @@ Type=simple
 PrivateDevices=yes
 CacheDirectory=go-fdo-server-manufacturer
 StateDirectory=go-fdo-server-manufacturer
-ExecStart=/usr/bin/go-fdo-server manufacturing
+ExecStart=/usr/bin/go-fdo-server manufacturing --log-level debug
 User=go-fdo-server-manufacturer
 
 [Install]

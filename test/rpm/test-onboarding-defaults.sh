@@ -15,7 +15,7 @@ generate_service_certs() {
 }
 
 configure_service_manufacturer() {
-  :
+  sudo ls -la /etc/go-fdo-server || true
 }
 
 configure_service_rendezvous() {

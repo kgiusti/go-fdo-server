@@ -21,7 +21,7 @@ Type=simple
 PrivateDevices=yes
 CacheDirectory=go-fdo-server-owner
 StateDirectory=go-fdo-server-owner
-ExecStart=/usr/bin/go-fdo-server owner
+ExecStart=/usr/bin/go-fdo-server owner --log-level debug
 User=go-fdo-server-owner
 
 [Install]
