@@ -447,15 +447,17 @@ set_or_update_rendezvous_info() {
   local rendezvous_port=$4
   local rendezvous_protocol=${5:-http}
 
+  # to speed up the tests, override the default delay of 120 seconds
+  local delay_seconds=10
   local real_rendezvous_ip
   real_rendezvous_ip="$(get_real_ip "${rendezvous_service_name}")"
   log_info "Checking if 'RendezvousInfo' is configured on manufacturer side (${manufacturer_url})"
   if [ -z "$(get_rendezvous_info "${manufacturer_url}")" ]; then
     log_warn "'RendezvousInfo' not found, creating it"
-    set_rendezvous_info "${manufacturer_url}" "${rendezvous_dns}" "${real_rendezvous_ip}" "${rendezvous_port}" "${rendezvous_protocol}"
+    set_rendezvous_info "${manufacturer_url}" "${rendezvous_dns}" "${real_rendezvous_ip}" "${rendezvous_port}" "${rendezvous_protocol}" "${delay_seconds}"
   else
     log_info "'RendezvousInfo' found, updating it"
-    update_rendezvous_info "${manufacturer_url}" "${rendezvous_dns}" "${real_rendezvous_ip}" "${rendezvous_port}" "${rendezvous_protocol}"
+    update_rendezvous_info "${manufacturer_url}" "${rendezvous_dns}" "${real_rendezvous_ip}" "${rendezvous_port}" "${rendezvous_protocol}" "${delay_seconds}"
   fi
   echo
 }

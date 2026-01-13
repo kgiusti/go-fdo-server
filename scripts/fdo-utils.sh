@@ -14,7 +14,14 @@ set_rendezvous_info () {
   local rendezvous_ip=$3
   local rendezvous_port=$4
   local rendezvous_protocol=$5
-  local rendezvous_info="[{\"dns\": \"${rendezvous_dns}\", \"device_port\": \"${rendezvous_port}\", \"protocol\": \"${rendezvous_protocol}\", \"ip\": \"${rendezvous_ip}\", \"owner_port\": \"${rendezvous_port}\"}]"
+  local delay_seconds=${6:-}
+
+  local rendezvous_info="\"dns\": \"${rendezvous_dns}\", \"device_port\": \"${rendezvous_port}\", \"protocol\": \"${rendezvous_protocol}\", \"ip\": \"${rendezvous_ip}\", \"owner_port\": \"${rendezvous_port}\""
+  if [ -n "${delay_seconds}" ]; then
+    rendezvous_info="${rendezvous_info}, \"delay_seconds\": ${delay_seconds}"
+  fi
+  rendezvous_info="[{${rendezvous_info}}]"
+
   curl --fail --verbose --silent --insecure \
        --request POST \
        --header 'Content-Type: text/plain' \
@@ -28,7 +35,14 @@ update_rendezvous_info () {
   local rendezvous_ip=$3
   local rendezvous_port=$4
   local rendezvous_protocol=$5
-  local rendezvous_info="[{\"dns\": \"${rendezvous_dns}\", \"device_port\": \"${rendezvous_port}\", \"protocol\": \"${rendezvous_protocol}\", \"ip\": \"${rendezvous_ip}\", \"owner_port\": \"${rendezvous_port}\"}]"
+  local delay_seconds=${6:-}
+
+  local rendezvous_info="\"dns\": \"${rendezvous_dns}\", \"device_port\": \"${rendezvous_port}\", \"protocol\": \"${rendezvous_protocol}\", \"ip\": \"${rendezvous_ip}\", \"owner_port\": \"${rendezvous_port}\""
+  if [ -n "${delay_seconds}" ]; then
+    rendezvous_info="${rendezvous_info}, \"delay_seconds\": ${delay_seconds}"
+  fi
+  rendezvous_info="[{${rendezvous_info}}]"
+
   curl --fail --verbose --silent --insecure \
        --request PUT \
        --header 'Content-Type: text/plain' \
