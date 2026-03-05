@@ -20,45 +20,6 @@ func (Secret) TableName() string {
 	return "secrets"
 }
 
-// MfgKey stores manufacturer keys
-type MfgKey struct {
-	Type      int    `gorm:"type:integer;not null;primaryKey"`
-	PKCS8     []byte `gorm:"not null"`
-	RsaBits   *int   `gorm:"type:integer;primaryKey"`
-	X509Chain []byte `gorm:"not null"`
-}
-
-// TableName specifies the table name for MfgKey model
-func (MfgKey) TableName() string {
-	return "mfg_keys"
-}
-
-// OwnerKey stores owner keys
-type OwnerKey struct {
-	Type      int    `gorm:"type:integer;not null;primaryKey"`
-	PKCS8     []byte `gorm:"not null"`
-	RsaBits   *int   `gorm:"type:integer;primaryKey"`
-	X509Chain []byte
-}
-
-// TableName specifies the table name for OwnerKey model
-func (OwnerKey) TableName() string {
-	return "owner_keys"
-}
-
-// RvBlob stores rendezvous blobs
-type RvBlob struct {
-	GUID    []byte    `gorm:"primaryKey"`
-	RV      []byte    `gorm:"not null"`
-	Voucher []byte    `gorm:"not null"`
-	Exp     time.Time `gorm:"not null;index:idx_rv_blob_exp"`
-}
-
-// TableName specifies the table name for RvBlob model
-func (RvBlob) TableName() string {
-	return "rv_blobs"
-}
-
 // Session stores session information
 type Session struct {
 	ID       []byte `gorm:"primaryKey"`

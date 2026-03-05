@@ -56,9 +56,6 @@ func InitDb(dbType, dsn string) (*State, error) {
 	// Auto-migrate all schemas
 	err = state.DB.AutoMigrate(
 		&Secret{},
-		&MfgKey{},
-		&OwnerKey{},
-		&RvBlob{},
 		&Session{},
 		&DeviceInfo{},
 		&IncompleteVoucher{},
@@ -114,10 +111,8 @@ var _ interface {
 	fdo.TO0SessionState
 	fdo.TO1SessionState
 	fdo.TO2SessionState
-	fdo.RendezvousBlobPersistentState
 	fdo.VoucherPersistentState
 	fdo.OwnerVoucherPersistentState
-	fdo.OwnerKeyPersistentState
 } = (*State)(nil)
 
 // TokenService implementation
