@@ -16,12 +16,12 @@ jobs:
         run: dnf install -y git make gcc shfmt npm
 
       - name: Install golang
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
           go-version: "1.26"
 
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Run make all
         env:
@@ -31,7 +31,7 @@ jobs:
           make all shfmt
 
       - name: Fail if the source code has changes after go fmt
-        uses: NathanielHill/fail-if-changes@master
+        uses: NathanielHill/fail-if-changes@9e6ed6bb0543551728592d8114cfaa1dcd9155a6 # v1.1.1
 
   test-rpms:
     name: Test srpm and rpm builds
@@ -42,12 +42,12 @@ jobs:
         run: dnf install -y git make npm
 
       - name: Install golang
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
           go-version: "1.26"
 
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Build SRPM
         run: |
@@ -60,19 +60,19 @@ jobs:
           make rpm
 
       - name: Fail if the source code has changes after build
-        uses: NathanielHill/fail-if-changes@master
+        uses: NathanielHill/fail-if-changes@9e6ed6bb0543551728592d8114cfaa1dcd9155a6 # v1.1.1
 
   test-onboarding:
     name: Test FIDO device onboarding
     runs-on: ubuntu-latest
     steps:
       - name: Install golang
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
           go-version: "1.26"
 
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Test FIDO device onboarding
         run: |
@@ -96,12 +96,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install golang
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
           go-version: "1.26"
 
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Test Ownership Voucher verification
         run: |
@@ -125,12 +125,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: install golang
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
           go-version: "1.26"
 
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Test FIDO resale protocol
         run: |
@@ -154,12 +154,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install golang
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
           go-version: "1.26"
 
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Test FSIM fdo.wget
         run: |
@@ -183,12 +183,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install golang
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
           go-version: "1.26"
 
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Test FSIM fdo.upload
         run: |
@@ -212,12 +212,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install golang
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
           go-version: "1.26"
 
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Test FSIM fdo.download
         run: |
@@ -241,12 +241,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install golang
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
           go-version: "1.26"
 
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Test FSIM fdo.command
         run: |
@@ -270,12 +270,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install golang
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
           go-version: "1.26"
 
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Test FIDO device onboarding
         run: |
@@ -299,12 +299,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install golang
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
           go-version: "1.26"
 
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Test FSIM Sequence
         run: |
@@ -328,12 +328,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install golang
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
           go-version: "1.26"
 
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Test Device CA API
         run: |
@@ -357,12 +357,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install golang
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
           go-version: "1.26"
 
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Test Device CA rendezvous trust verification
         run: |
@@ -386,12 +386,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install golang
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
           go-version: "1.26"
 
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Test RV bypass
         run: |
@@ -415,12 +415,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install golang
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
           go-version: "1.26"
 
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Test FIDO device onboarding V2
         run: |
@@ -444,12 +444,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install golang
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
           go-version: "1.26"
 
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Test RV bypass V2
         run: |
@@ -473,12 +473,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install golang
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
         with:
           go-version: "1.26"
 
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Test RVInfo API V2 Lifecycle
         run: |
